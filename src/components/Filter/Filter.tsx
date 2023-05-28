@@ -1,6 +1,6 @@
 import FilterStl from './Filter.module.css';
-import usePHBState from '../../redux/selectors';
 import { ContactFilter } from '../../redux/filterSlices';
+import usePHBState from '../../redux/selectors';
 import { useDispatch } from 'react-redux';
 
 export default function Filter() {

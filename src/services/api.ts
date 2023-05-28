@@ -8,7 +8,7 @@ export async function getContacts() {
   console.log(response.data);
   return response.data;
 }
-export async function addContact(contact: IContact) {
+export async function putContact(contact: IContact) {
   const response = await axios.post('/contacts', contact);
   console.log(response.data);
   return response.data;

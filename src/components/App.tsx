@@ -2,7 +2,7 @@ import ContactForm from './ContactForm/ContactForm';
 import ContactsList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
 import usePHBState from '../redux/selectors';
-import { IContact } from '../types';
+import { IContact } from 'types';
 import AppStl from './App.module.css';
 import { getContacts } from '../services/api';
 import { useEffect } from 'react';
