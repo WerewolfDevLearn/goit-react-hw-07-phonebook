@@ -22,7 +22,7 @@ const contactsSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(deleteContact.fulfilled, (state, action) => {
-      state.items.filter((item) => action.payload !== item.id);
+      state.items = state.items.filter((item) => action.payload.id !== item.id);
       state.isLoading = false;
     });
     builder.addCase(fetchContacts.pending, (state) => {

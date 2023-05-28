@@ -8,12 +8,20 @@ export interface IValues {
   number: string;
 }
 
-export interface ISate {
-  contacts: IContact[];
-  filter: string;
-}
+// export interface ISate {
+//   contacts: IContact[];
+//   filter: string;
+// }
 export interface IContactsState {
   items: IContact[];
   isLoading: boolean;
   error: any;
+}
+export interface ISate {
+  contacts: {
+    items: IContact[];
+    isLoading: boolean;
+    error: any;
+  };
+  filter: string;
 }

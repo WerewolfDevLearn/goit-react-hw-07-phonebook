@@ -1,23 +1,27 @@
 import ContactForm from './ContactForm/ContactForm';
 import ContactsList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
-import usePHBState from '../redux/selectors';
-import { IContact } from 'types';
 import AppStl from './App.module.css';
-import { getContacts } from '../services/api';
+import usePHBState from '../redux/selectors';
+import { fetchContacts } from '../redux/contactsOps';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { IContact } from '../types';
+import Loader from './Loader/Loader';
 
 export default function App() {
+  const dispatch = useDispatch();
   const { contacts, filter } = usePHBState();
-  const getVisibleContacts = (contacts: IContact[]) => {
-    return contacts.filter((contact) =>
-      contact.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()),
+  const { items, error, isLoading } = contacts;
+  const getVisibleContacts = (items: IContact[]) => {
+    return items.filter((item) =>
+      item.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()),
     );
   };
   useEffect(() => {
-    getContacts();
-  }, []);
-  const visibleContacts = getVisibleContacts(contacts);
+    dispatch(fetchContacts());
+  }, [dispatch]);
+  const visibleContacts = getVisibleContacts(items);
   return (
     <div className={AppStl.container}>
       <h2 className={AppStl.heading}>PhoneBook</h2>
@@ -26,9 +30,12 @@ export default function App() {
 
       <h2 className={AppStl.heading}>Contacts</h2>
 
-      {contacts.length > 1 && <Filter />}
+      {items.length > 1 && <Filter />}
 
-      {contacts.length > 0 && <ContactsList visibleContacts={visibleContacts} />}
+      {items.length > 0 && !error && !isLoading && (
+        <ContactsList visibleContacts={visibleContacts} />
+      )}
+      {isLoading && <Loader />}
     </div>
   );
 }

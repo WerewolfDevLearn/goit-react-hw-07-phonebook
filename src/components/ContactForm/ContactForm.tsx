@@ -20,13 +20,10 @@ const schema = yup.object().shape({
 
 export default function ContactForm() {
   const { contacts } = usePHBState();
+  const { items } = contacts;
   const dispatch = useDispatch();
   const onSubmitFormik = (values: IValues, { resetForm }: FormikHelpers<IValues>) => {
-    if (
-      contacts.some(
-        (contact) => contact.name.toLocaleLowerCase() === values.name.toLocaleLowerCase(),
-      )
-    ) {
+    if (items.some((item) => item.name.toLocaleLowerCase() === values.name.toLocaleLowerCase())) {
       alert(`${values.name} is already in Contacts`);
       return;
     }
