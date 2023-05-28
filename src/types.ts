@@ -25,3 +25,7 @@ export interface ISate {
   };
   filter: string;
 }
+
+export interface IErrorProps {
+  message: string;
+}

@@ -1,3 +1,4 @@
-export default function Error() {
-  return <p>Sorry. There is no such page.</p>;
+import { IErrorProps } from '../../types';
+export default function Error({ message }: IErrorProps) {
+  return <p>{message}</p>;
 }

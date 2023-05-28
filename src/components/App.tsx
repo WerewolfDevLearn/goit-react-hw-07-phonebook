@@ -8,11 +8,13 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { IContact } from '../types';
 import Loader from './Loader/Loader';
+import Error from './Error/Error';
 
 export default function App() {
   const dispatch = useDispatch();
   const { contacts, filter } = usePHBState();
   const { items, error, isLoading } = contacts;
+  console.log(error);
   const getVisibleContacts = (items: IContact[]) => {
     return items.filter((item) =>
       item.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()),
@@ -36,6 +38,7 @@ export default function App() {
         <ContactsList visibleContacts={visibleContacts} />
       )}
       {isLoading && <Loader />}
+      {error && <Error message={error} />}
     </div>
   );
 }
